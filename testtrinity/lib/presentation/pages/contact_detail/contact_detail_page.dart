@@ -186,7 +186,6 @@ class ContactDetailPage extends GetView<ContactDetailController> {
     return GestureDetector(
       onTap: () {
         controller.removeData();
-        Get.back();
       },
       child: Container(
         height: 53.h,

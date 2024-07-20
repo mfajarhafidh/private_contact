@@ -138,6 +138,7 @@ class ContactDetailController extends GetxController {
           element["id"].toString().toLowerCase() ==
           mapData["id"].toString().toLowerCase(),
     );
+    Get.offNamed(Routes.HOME);
 
     refresh();
   }
