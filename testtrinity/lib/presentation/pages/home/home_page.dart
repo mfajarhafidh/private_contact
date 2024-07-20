@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:testtrinity/presentation/controllers/home/home_controller.dart';
 import 'package:testtrinity/presentation/pages/home/components/custom_bottom_navigation_bar.dart';
 import 'package:testtrinity/presentation/pages/home/tabs/tab_home.dart';
+import 'package:testtrinity/presentation/pages/home/tabs/tab_profile.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -24,6 +25,7 @@ class HomePage extends GetView<HomeController> {
                 },
                 children: [
                   TabHome(),
+                  TabProfile(),
                 ],
               ),
               Align(

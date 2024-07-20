@@ -7,12 +7,17 @@ class HomeController extends GetxController {
 
   RxString search = ''.obs;
   RxString userID = ''.obs;
+  RxString name = ''.obs;
+  RxString email = ''.obs;
+  RxString dateOfBirth = ''.obs;
 
   RxBool isFilled = false.obs;
   RxBool enableFlag = false.obs;
 
   late PageController pageController;
   TextEditingController textEditingController = TextEditingController();
+
+  Map dataProfile = {};
 
   RxList listSearch = [].obs;
 
@@ -162,6 +167,7 @@ class HomeController extends GetxController {
     }
     flagText();
     pageController = PageController(initialPage: 0);
+    profileData();
   }
 
   Future<void> onRefresh() async {
@@ -197,5 +203,14 @@ class HomeController extends GetxController {
         .isNotEmpty) {
       enableFlag.value = true;
     }
+  }
+
+  void profileData() {
+    dataProfile = listData.firstWhere(
+      (element) => element["id"].toString().toLowerCase() == userID.value,
+    );
+    name.value = '${dataProfile['firstName']} ${dataProfile['lastName']}';
+    email.value = '${dataProfile['email']}';
+    dateOfBirth.value = '${dataProfile['dob']}';
   }
 }
