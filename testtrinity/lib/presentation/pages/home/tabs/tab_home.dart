@@ -68,9 +68,8 @@ class TabHome extends GetView<HomeController> {
             : InputDecoration(
                 isDense: true,
                 hintText: 'Search your contact list...',
-                hintStyle: TextStyleConstants.thinText.copyWith(
-                  fontSize: 14.sp,
-                ),
+                hintStyle: TextStyleConstants.thinText
+                    .copyWith(fontSize: 14.sp, color: ColorConstants.darkGray),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.r),
                     borderSide: BorderSide(color: ColorConstants.darkGray)),
