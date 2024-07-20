@@ -14,6 +14,7 @@ class ContactDetailController extends GetxController {
   Map mapData = {};
 
   RxBool isFilled = false.obs;
+  RxBool enableCreate = false.obs;
 
   HomeController cHome = Get.find();
 
@@ -28,8 +29,12 @@ class ContactDetailController extends GetxController {
   void onInit() {
     var args = Get.arguments;
     if (args != null) {
-      name.value = args[0];
-      mapData = args[1];
+      if (args[0] == true) {
+        enableCreate.value = args[0];
+      } else {
+        name.value = args[0];
+        mapData = args[1];
+      }
     }
     super.onInit();
   }
@@ -135,5 +140,41 @@ class ContactDetailController extends GetxController {
     );
 
     refresh();
+  }
+
+  void saveData() {
+    if (firstName.value.isNotEmpty &&
+        lastName.value.isNotEmpty &&
+        email.value.isNotEmpty &&
+        selectedDate.value.isNotEmpty) {
+      cHome.listData.add({
+        "firstName": firstName.value,
+        "lastName": lastName.value,
+        "email": email.value,
+        "dob": selectedDate.value,
+      });
+    } else if (firstName.value.isNotEmpty &&
+        lastName.value.isNotEmpty &&
+        email.value.isNotEmpty) {
+      cHome.listData.add({
+        "firstName": firstName.value,
+        "lastName": lastName.value,
+        "email": email.value,
+      });
+    } else if (firstName.value.isNotEmpty &&
+        lastName.value.isNotEmpty &&
+        selectedDate.value.isNotEmpty) {
+      cHome.listData.add({
+        "firstName": firstName.value,
+        "lastName": lastName.value,
+        "dob": selectedDate.value,
+      });
+    } else {
+      cHome.listData.add({
+        "firstName": firstName.value,
+        "lastName": lastName.value,
+      });
+    }
+    Get.offNamed(Routes.HOME);
   }
 }

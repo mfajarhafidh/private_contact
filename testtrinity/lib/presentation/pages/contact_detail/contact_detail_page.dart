@@ -40,16 +40,23 @@ class ContactDetailPage extends GetView<ContactDetailController> {
             controller: controller.scrollController,
             children: [
               24.verticalSpace,
-              Center(
-                child: Avatar(
-                  shape: AvatarShape.circle(50.r),
-                  border: Border.all(color: ColorConstants.darkGray),
-                  name: controller.name.value,
-                  textStyle: TextStyleConstants.thinText
-                      .copyWith(fontSize: 30.sp, color: ColorConstants.white),
-                  placeholderColors: [ColorConstants.blue],
-                ),
-              ),
+              controller.name.value.isEmpty
+                  ? CircleAvatar(
+                      radius: 50.r,
+                      backgroundColor: ColorConstants.blue,
+                      child:
+                          SvgPicture.asset('assets/icons/icon_create_new.svg'),
+                    )
+                  : Center(
+                      child: Avatar(
+                        shape: AvatarShape.circle(50.r),
+                        border: Border.all(color: ColorConstants.darkGray),
+                        name: controller.name.value,
+                        textStyle: TextStyleConstants.thinText.copyWith(
+                            fontSize: 30.sp, color: ColorConstants.white),
+                        placeholderColors: [ColorConstants.blue],
+                      ),
+                    ),
               47.verticalSpace,
               Text(
                 'Main Information',
@@ -139,9 +146,15 @@ class ContactDetailPage extends GetView<ContactDetailController> {
               10.verticalSpace,
               _birthdate(),
               169.verticalSpace,
-              _buttonUpdate(),
-              27.verticalSpace,
-              _buttonRemove(),
+              controller.enableCreate.value == true
+                  ? _buttonSave()
+                  : Column(
+                      children: [
+                        _buttonUpdate(),
+                        27.verticalSpace,
+                        _buttonRemove(),
+                      ],
+                    )
             ],
           ),
         ),
@@ -241,6 +254,26 @@ class ContactDetailPage extends GetView<ContactDetailController> {
                           .copyWith(color: ColorConstants.darkGray),
                     ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buttonSave() {
+    return GestureDetector(
+      onTap: () {
+        controller.saveData();
+      },
+      child: Container(
+        height: 53.h,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.r),
+            color: ColorConstants.blue.withOpacity(0.2)),
+        child: Center(
+          child: Text(
+            'Save',
+            style: TextStyleConstants.buttonText,
           ),
         ),
       ),

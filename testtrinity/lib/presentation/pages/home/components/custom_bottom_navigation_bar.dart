@@ -35,10 +35,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 80.h,
+      height: 40.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.w), topRight: Radius.circular(20.w)),
         color: Colors.white,
       ),
       child: Row(

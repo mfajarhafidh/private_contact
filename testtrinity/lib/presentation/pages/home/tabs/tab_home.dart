@@ -43,6 +43,12 @@ class TabHome extends GetView<HomeController> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed(Routes.CONTACT_DETAIL, arguments: [true]),
+        backgroundColor: ColorConstants.blue,
+        child: SvgPicture.asset('assets/icons/icon_plus.svg'),
+      ),
     );
   }
 
