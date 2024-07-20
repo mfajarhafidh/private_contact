@@ -11,7 +11,8 @@ class LoginController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    if (await StorageLocal().getString(StorageLocal.USER_ID) != '') {
+    userID.value = await StorageLocal().getString(StorageLocal.USER_ID);
+    if (userID.value.isNotEmpty) {
       postLogin();
     }
     super.onInit();
@@ -44,18 +45,6 @@ class LoginController extends GetxController {
           )
           .isNotEmpty) {
         Get.offAllNamed(Routes.HOME, arguments: [userID.value]);
-      } else if (await StorageLocal().getString(StorageLocal.USER_ID) != '') {
-        if (await DataJsonModel()
-            .listDataJson
-            .firstWhere(
-              (element) =>
-                  element["id"].toString().toLowerCase() ==
-                  StorageLocal().getString(StorageLocal.USER_ID),
-            )
-            .isNotEmpty) {
-          Get.offAllNamed(Routes.HOME,
-              arguments: [StorageLocal().getString(StorageLocal.USER_ID)]);
-        }
       }
     } catch (e) {
       debugPrint(e.toString());
