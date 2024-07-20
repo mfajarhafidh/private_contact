@@ -7,4 +7,6 @@ abstract class AssetsConstants {
   static const String iconSearch = 'assets/icons/icon_search.svg';
   static const String iconSearchNotEmpty =
       'assets/icons/icon_search_not_empty.svg';
+  static const String iconEmail = 'assets/icons/icon_email.svg';
+  static const String iconBirthdate = 'assets/icons/icon_birthdate.svg';
 }
