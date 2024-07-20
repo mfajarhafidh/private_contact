@@ -30,7 +30,7 @@ class LoginPage extends GetView<LoginController> {
               style: TextStyleConstants.defaultText
                   .copyWith(color: ColorConstants.darkGray),
             ),
-            45.verticalSpace,
+            23.verticalSpace,
             TextFieldUtils(
               prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 14.w, top: 19.h, bottom: 19.h),
@@ -48,10 +48,11 @@ class LoginPage extends GetView<LoginController> {
               validationText: 'Required. Please fill this',
               textInputAction: TextInputAction.next,
             ),
+            20.verticalSpace,
+            _buttonLogin()
           ],
         ),
       ),
-      bottomNavigationBar: _buttonLogin(),
     );
   }
 
