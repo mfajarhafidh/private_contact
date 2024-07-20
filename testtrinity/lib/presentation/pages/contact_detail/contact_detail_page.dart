@@ -42,7 +42,7 @@ class ContactDetailPage extends GetView<ContactDetailController> {
               child: Avatar(
                 shape: AvatarShape.circle(50.r),
                 border: Border.all(color: ColorConstants.darkGray),
-                name: 'AS',
+                name: controller.name.value,
                 textStyle: TextStyleConstants.thinText
                     .copyWith(fontSize: 30.sp, color: ColorConstants.white),
                 placeholderColors: [ColorConstants.blue],
@@ -77,6 +77,7 @@ class ContactDetailPage extends GetView<ContactDetailController> {
               validation: controller.validateEmptyField,
               keyboardType: TextInputType.text,
               validationText: 'Required. Please fill this',
+              textInputAction: TextInputAction.next,
             ),
             TextFieldUtils(
               prefixIcon: Padding(
@@ -93,6 +94,7 @@ class ContactDetailPage extends GetView<ContactDetailController> {
               validation: controller.validateEmptyField,
               keyboardType: TextInputType.text,
               validationText: 'Required. Please fill this',
+              textInputAction: TextInputAction.done,
             ),
             47.verticalSpace,
             Text(
@@ -121,6 +123,9 @@ class ContactDetailPage extends GetView<ContactDetailController> {
               onChanged: (value) => controller.setEmail(value: value),
               validation: (value) => controller.validateEmail(value: value),
               keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.next,
+              validationText:
+                  'Please use correct email format, example: example@gmail.com',
             ),
             TextFieldUtils(
               prefixIcon: Padding(
@@ -134,6 +139,7 @@ class ContactDetailPage extends GetView<ContactDetailController> {
               hint: 'Enter birthday..',
               onChanged: (value) => controller.setDateOfBirth(value: value),
               keyboardType: TextInputType.phone,
+              textInputAction: TextInputAction.done,
             ),
             169.verticalSpace,
             _buttonUpdate(),

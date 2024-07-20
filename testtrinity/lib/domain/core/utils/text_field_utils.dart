@@ -39,6 +39,7 @@ class TextFieldUtils extends StatefulWidget {
     this.isReadOnly = false,
     this.isMaxlines = false,
     this.requiredText = false,
+    this.textInputAction,
   }) : super(key: key);
 
   final String? label;
@@ -70,6 +71,7 @@ class TextFieldUtils extends StatefulWidget {
   final bool isReadOnly;
   final bool isMaxlines;
   final bool requiredText;
+  final TextInputAction? textInputAction;
 
   @override
   State<TextFieldUtils> createState() => _TextFieldUtilsState();
@@ -191,6 +193,7 @@ class _TextFieldUtilsState extends State<TextFieldUtils> {
                 children: [
                   Focus(
                     child: TextField(
+                      textInputAction: widget.textInputAction,
                       maxLines: widget.isMaxlines ? null : 1,
                       enabled: widget.enable,
                       readOnly: widget.isReadOnly,

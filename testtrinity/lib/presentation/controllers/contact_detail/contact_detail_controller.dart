@@ -6,6 +6,9 @@ class ContactDetailController extends GetxController {
   RxString lastName = ''.obs;
   RxString email = ''.obs;
   RxString dateOfBirth = ''.obs;
+  RxString name = ''.obs;
+
+  Map mapData = {};
 
   RxBool isFilled = false.obs;
 
@@ -13,6 +16,16 @@ class ContactDetailController extends GetxController {
   TextEditingController textControllerLastName = TextEditingController();
   TextEditingController textControllerEmail = TextEditingController();
   TextEditingController textControllerDateOfBirth = TextEditingController();
+
+  @override
+  void onInit() {
+    var args = Get.arguments;
+    if (args != null) {
+      name.value = args[0];
+      mapData = args[1];
+    }
+    super.onInit();
+  }
 
   void setFirstName({required String value}) {
     firstName.value = value;
