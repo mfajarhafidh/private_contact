@@ -10,11 +10,25 @@ dependencies:
   get:
   flutter:
     sdk: flutter
+  avatars: ^3.0.2
+  flutter_svg: ^0.22.0
+  google_fonts: ^2.3.1
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: any
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: any
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/icon_home.svg"
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
