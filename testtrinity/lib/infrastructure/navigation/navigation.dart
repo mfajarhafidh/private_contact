@@ -15,5 +15,10 @@ class Nav {
       page: () => ContactDetailPage(),
       binding: ContactDetailBinding(),
     ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
+    ),
   ];
 }
