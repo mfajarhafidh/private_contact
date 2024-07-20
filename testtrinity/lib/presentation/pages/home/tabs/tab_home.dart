@@ -27,16 +27,19 @@ class TabHome extends GetView<HomeController> {
         ),
       ),
       body: Obx(
-        () => Padding(
-          padding: EdgeInsets.only(left: 26.w, right: 32.w),
-          child: ListView(
-            children: [
-              18.verticalSpace,
-              _textField(),
-              25.verticalSpace,
-              _gridContacts(),
-              75.verticalSpace,
-            ],
+        () => RefreshIndicator(
+          onRefresh: () => controller.onRefresh(),
+          child: Padding(
+            padding: EdgeInsets.only(left: 26.w, right: 32.w),
+            child: ListView(
+              children: [
+                18.verticalSpace,
+                _textField(),
+                25.verticalSpace,
+                _gridContacts(),
+                75.verticalSpace,
+              ],
+            ),
           ),
         ),
       ),
@@ -44,48 +47,45 @@ class TabHome extends GetView<HomeController> {
   }
 
   Widget _textField() {
-    return Obx(
-      () => TextField(
-        onTapOutside: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        maxLines: 1,
-        enabled: true,
-        controller: controller.textEditingController,
-        style: TextStyleConstants.defaultText,
-        textAlignVertical: TextAlignVertical.center,
-        decoration: controller.isFilled.value && controller.search.value != ''
-            ? InputDecoration(
-                labelStyle:
-                    TextStyleConstants.thinText.copyWith(fontSize: 14.sp),
-                isDense: true,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                    borderSide: BorderSide(color: ColorConstants.darkGray)),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: SvgPicture.asset(
-                    AssetsConstants.iconSearchNotEmpty,
-                  ),
-                ))
-            : InputDecoration(
-                isDense: true,
-                hintText: 'Search your contact list...',
-                hintStyle: TextStyleConstants.thinText
-                    .copyWith(fontSize: 14.sp, color: ColorConstants.darkGray),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                    borderSide: BorderSide(color: ColorConstants.darkGray)),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: SvgPicture.asset(
-                    AssetsConstants.iconSearch,
-                  ),
-                )),
-        onChanged: (value) {
-          controller.setSearch(value);
-        },
-      ),
+    return TextField(
+      onTapOutside: (event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      maxLines: 1,
+      enabled: true,
+      controller: controller.textEditingController,
+      style: TextStyleConstants.defaultText,
+      textAlignVertical: TextAlignVertical.center,
+      decoration: controller.isFilled.value && controller.search.value != ''
+          ? InputDecoration(
+              labelStyle: TextStyleConstants.thinText.copyWith(fontSize: 14.sp),
+              isDense: true,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.r),
+                  borderSide: BorderSide(color: ColorConstants.darkGray)),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: SvgPicture.asset(
+                  AssetsConstants.iconSearchNotEmpty,
+                ),
+              ))
+          : InputDecoration(
+              isDense: true,
+              hintText: 'Search your contact list...',
+              hintStyle: TextStyleConstants.thinText
+                  .copyWith(fontSize: 14.sp, color: ColorConstants.darkGray),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.r),
+                  borderSide: BorderSide(color: ColorConstants.darkGray)),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: SvgPicture.asset(
+                  AssetsConstants.iconSearch,
+                ),
+              )),
+      onChanged: (value) {
+        controller.setSearch(value);
+      },
     );
   }
 

@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:testtrinity/infrastructure/navigation/routes.dart';
+import 'package:testtrinity/presentation/controllers/home/home_controller.dart';
 
 class ContactDetailController extends GetxController {
   RxString firstName = ''.obs;
   RxString lastName = ''.obs;
   RxString email = ''.obs;
-  RxString dateOfBirth = ''.obs;
   RxString name = ''.obs;
+  RxString selectedDate = ''.obs;
 
   Map mapData = {};
 
   RxBool isFilled = false.obs;
 
+  HomeController cHome = Get.find();
+
   TextEditingController textControllerFirstName = TextEditingController();
   TextEditingController textControllerLastName = TextEditingController();
   TextEditingController textControllerEmail = TextEditingController();
   TextEditingController textControllerDateOfBirth = TextEditingController();
+
+  ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
@@ -41,16 +48,16 @@ class ContactDetailController extends GetxController {
     email.value = value;
   }
 
-  void setDateOfBirth({required String value}) {
-    dateOfBirth.value = value;
-  }
-
   void validateForm() {
     isFilled.value =
         isNotEmpty(data: firstName.value) && isNotEmpty(data: lastName.value);
   }
 
-  bool validateEmptyField(String value) {
+  bool validateEmptyFieldFirstName(String value) {
+    return isNotEmpty(data: value);
+  }
+
+  bool validateEmptyFieldLastName(String value) {
     return isNotEmpty(data: value);
   }
 
@@ -66,5 +73,67 @@ class ContactDetailController extends GetxController {
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
     return emailRegex.hasMatch(value) || value == '';
+  }
+
+  Future<void> selectDate() async {
+    DateTime? pickedDate = await showDatePicker(
+      context: Get.context!,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (pickedDate != null) {
+      String finalPick = DateFormat('dd/MM/yyyy').format(pickedDate).toString();
+      selectedDate.value = finalPick.toString();
+    }
+  }
+
+  void updateData() {
+    if (isFilled.value == true) {
+      name.value = '${firstName.value} ${lastName.value}';
+      cHome.listData.firstWhere(
+        (element) =>
+            element["id"].toString().toLowerCase() ==
+            mapData["id"].toString().toLowerCase(),
+      )['firstName'] = firstName.value;
+      cHome.listData.firstWhere(
+        (element) =>
+            element["id"].toString().toLowerCase() ==
+            mapData["id"].toString().toLowerCase(),
+      )['lastName'] = lastName.value;
+      cHome.listData.firstWhere(
+        (element) =>
+            element["id"].toString().toLowerCase() ==
+            mapData["id"].toString().toLowerCase(),
+      )['email'] = email.value;
+      cHome.listData.firstWhere(
+        (element) =>
+            element["id"].toString().toLowerCase() ==
+            mapData["id"].toString().toLowerCase(),
+      )['dob'] = selectedDate.value;
+
+      Get.offNamed(Routes.HOME);
+    } else {
+      scrollController.animateTo(scrollController.position.minScrollExtent,
+          duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+      if (firstName.value.isEmpty) {
+        setFirstName(value: '');
+      }
+      if (lastName.value.isEmpty) {
+        setLastname(value: '');
+      }
+    }
+
+    refresh();
+  }
+
+  void removeData() {
+    cHome.listData.removeWhere(
+      (element) =>
+          element["id"].toString().toLowerCase() ==
+          mapData["id"].toString().toLowerCase(),
+    );
+
+    refresh();
   }
 }

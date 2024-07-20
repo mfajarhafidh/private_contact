@@ -1,5 +1,5 @@
 class DataJsonModel {
-  List listDataJson = [
+  List<Map<String, String>> listDataJson = [
     {
       "id": "5c8a80f52dfee238898d64cf",
       "firstName": "Phoebe",
