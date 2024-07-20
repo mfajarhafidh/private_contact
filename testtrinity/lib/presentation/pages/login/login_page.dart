@@ -57,7 +57,7 @@ class LoginPage extends GetView<LoginController> {
 
   Widget _buttonLogin() {
     return GestureDetector(
-      // onTap: () =>,
+      onTap: () => controller.postLogin(),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 17.w, vertical: 30.h),
         child: Container(
