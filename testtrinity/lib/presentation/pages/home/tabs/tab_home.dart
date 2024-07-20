@@ -103,6 +103,8 @@ class TabHome extends GetView<HomeController> {
           : controller.listData.length,
       itemBuilder: (BuildContext context, int i) {
         return _itemGridContacts(
+            enableFlag: controller.enableFlag.value == true &&
+                controller.listData[i]['id'] == controller.userID.value,
             contact: controller.listSearch.isNotEmpty
                 ? controller.listSearch[i]
                 : controller.listData[i],
@@ -113,7 +115,8 @@ class TabHome extends GetView<HomeController> {
     );
   }
 
-  Widget _itemGridContacts({required String name, required Map contact}) {
+  Widget _itemGridContacts(
+      {required String name, required Map contact, required bool enableFlag}) {
     return InkWell(
       onTap: () =>
           Get.toNamed(Routes.CONTACT_DETAIL, arguments: [name, contact]),
@@ -134,11 +137,29 @@ class TabHome extends GetView<HomeController> {
               placeholderColors: [ColorConstants.blue],
             ),
             8.verticalSpace,
-            Text(
-              name,
-              style: TextStyleConstants.defaultText,
-              textAlign: TextAlign.center,
-            )
+            enableFlag
+                ? RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        style: TextStyleConstants.defaultText,
+                        children: [
+                          TextSpan(
+                            text: name,
+                          ),
+                          WidgetSpan(child: 3.horizontalSpace),
+                          TextSpan(
+                              text: '(you)',
+                              style: TextStyleConstants.defaultText.copyWith(
+                                  fontSize: 13.sp,
+                                  color: ColorConstants.darkGray,
+                                  fontStyle: FontStyle.italic)),
+                        ]),
+                  )
+                : Text(
+                    name,
+                    style: TextStyleConstants.defaultText,
+                    textAlign: TextAlign.center,
+                  )
           ],
         ),
       ),

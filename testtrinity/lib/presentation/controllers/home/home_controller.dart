@@ -6,8 +6,10 @@ class HomeController extends GetxController {
   RxInt selectedPage = 0.obs;
 
   RxString search = ''.obs;
+  RxString userID = ''.obs;
 
   RxBool isFilled = false.obs;
+  RxBool enableFlag = false.obs;
 
   late PageController pageController;
   TextEditingController textEditingController = TextEditingController();
@@ -154,6 +156,11 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    var args = Get.arguments;
+    if (args != null) {
+      userID.value = args[0];
+    }
+    flagText();
     pageController = PageController(initialPage: 0);
   }
 
@@ -179,5 +186,16 @@ class HomeController extends GetxController {
       (p0) =>
           '${p0['firstName']} ${p0['lastName']}'.toLowerCase().contains(value),
     );
+  }
+
+  void flagText() {
+    if (listData
+        .firstWhere(
+          (element) => element["id"].toString().toLowerCase() == userID.value,
+        )
+        .toString()
+        .isNotEmpty) {
+      enableFlag.value = true;
+    }
   }
 }

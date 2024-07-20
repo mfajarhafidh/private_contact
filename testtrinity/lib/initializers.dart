@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config.dart';
 
@@ -10,6 +11,7 @@ class Initializer {
       WidgetsFlutterBinding.ensureInitialized();
       _initGetConnect();
       _initScreenPreference();
+      SharedPreferences.getInstance();
     } catch (err) {
       rethrow;
     }
