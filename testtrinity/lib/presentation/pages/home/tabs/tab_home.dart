@@ -26,15 +26,18 @@ class TabHome extends GetView<HomeController> {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(left: 26.w, right: 32.w),
-        child: ListView(
-          children: [
-            18.verticalSpace,
-            _textField(),
-            25.verticalSpace,
-            _gridContacts()
-          ],
+      body: Obx(
+        () => Padding(
+          padding: EdgeInsets.only(left: 26.w, right: 32.w),
+          child: ListView(
+            children: [
+              18.verticalSpace,
+              _textField(),
+              25.verticalSpace,
+              _gridContacts(),
+              75.verticalSpace,
+            ],
+          ),
         ),
       ),
     );
@@ -88,22 +91,32 @@ class TabHome extends GetView<HomeController> {
 
   Widget _gridContacts() {
     return GridView.builder(
+      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 10.h,
         crossAxisSpacing: 16.w,
       ),
-      itemCount: 5,
+      itemCount: controller.listSearch.isNotEmpty
+          ? controller.listSearch.length
+          : controller.listData.length,
       itemBuilder: (BuildContext context, int i) {
-        return _itemGridContacts();
+        return _itemGridContacts(
+            contact: controller.listSearch.isNotEmpty
+                ? controller.listSearch[i]
+                : controller.listData[i],
+            name: controller.listSearch.isNotEmpty
+                ? '${controller.listSearch[i]['firstName']} ${controller.listSearch[i]['lastName']}'
+                : '${controller.listData[i]['firstName']} ${controller.listData[i]['lastName']}');
       },
     );
   }
 
-  Widget _itemGridContacts() {
+  Widget _itemGridContacts({required String name, required Map contact}) {
     return InkWell(
-      onTap: () => Get.toNamed(Routes.CONTACT_DETAIL),
+      onTap: () =>
+          Get.toNamed(Routes.CONTACT_DETAIL, arguments: [name, contact]),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
@@ -113,17 +126,18 @@ class TabHome extends GetView<HomeController> {
           children: [
             5.verticalSpace,
             Avatar(
-              shape: AvatarShape.circle(45.r),
+              shape: AvatarShape.circle(40.r),
               border: Border.all(color: ColorConstants.darkGray),
-              name: 'AS',
+              name: name,
               textStyle: TextStyleConstants.thinText
                   .copyWith(fontSize: 30.sp, color: ColorConstants.white),
               placeholderColors: [ColorConstants.blue],
             ),
             8.verticalSpace,
             Text(
-              'Avi Savannah',
+              name,
               style: TextStyleConstants.defaultText,
+              textAlign: TextAlign.center,
             )
           ],
         ),
