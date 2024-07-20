@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-
-import '../../presentation/pages.dart';
-import '../../presentation/bindings/bindings.dart';
+import 'package:testtrinity/presentation/bindings/bindings.dart';
+import 'package:testtrinity/presentation/pages.dart';
 import 'routes.dart';
 
 class Nav {
@@ -10,6 +9,11 @@ class Nav {
       name: Routes.HOME,
       page: () => HomePage(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Routes.CONTACT_DETAIL,
+      page: () => ContactDetailPage(),
+      binding: ContactDetailBinding(),
     ),
   ];
 }

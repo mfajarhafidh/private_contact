@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:testtrinity/domain/core/constants/assets_constants.dart';
 import 'package:testtrinity/domain/core/constants/color_constants.dart';
 import 'package:testtrinity/domain/core/constants/text_style_constants.dart';
+import 'package:testtrinity/infrastructure/navigation/routes.dart';
 import 'package:testtrinity/presentation/controllers/home/home_controller.dart';
 
 class TabHome extends GetView<HomeController> {
@@ -102,28 +103,31 @@ class TabHome extends GetView<HomeController> {
   }
 
   Widget _itemGridContacts() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-        border: Border.all(color: ColorConstants.darkGray),
-      ),
-      child: Column(
-        children: [
-          5.verticalSpace,
-          Avatar(
-            shape: AvatarShape.circle(45.r),
-            border: Border.all(color: ColorConstants.darkGray),
-            name: 'AS',
-            textStyle: TextStyleConstants.thinText
-                .copyWith(fontSize: 30.sp, color: ColorConstants.white),
-            placeholderColors: [ColorConstants.blue],
-          ),
-          8.verticalSpace,
-          Text(
-            'Avi Savannah',
-            style: TextStyleConstants.defaultText,
-          )
-        ],
+    return InkWell(
+      onTap: () => Get.toNamed(Routes.CONTACT_DETAIL),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.r),
+          border: Border.all(color: ColorConstants.darkGray),
+        ),
+        child: Column(
+          children: [
+            5.verticalSpace,
+            Avatar(
+              shape: AvatarShape.circle(45.r),
+              border: Border.all(color: ColorConstants.darkGray),
+              name: 'AS',
+              textStyle: TextStyleConstants.thinText
+                  .copyWith(fontSize: 30.sp, color: ColorConstants.white),
+              placeholderColors: [ColorConstants.blue],
+            ),
+            8.verticalSpace,
+            Text(
+              'Avi Savannah',
+              style: TextStyleConstants.defaultText,
+            )
+          ],
+        ),
       ),
     );
   }

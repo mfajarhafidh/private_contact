@@ -4,4 +4,5 @@ class Routes {
   }
 
   static const HOME = '/home';
+  static const CONTACT_DETAIL = '/contact_detail';
 }
