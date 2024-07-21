@@ -1,4 +1,4 @@
-![Simulator Screenshot - iPhone 15 - 2024-07-21 at 08 23 41](https://github.com/user-attachments/assets/dc9c4312-c819-41e2-ac88-2010cfa29dfb)# Private Contact
+# Private Contact
 
 ## Sssh, access your private contact using your ID!
 
