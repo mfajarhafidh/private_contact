@@ -85,7 +85,6 @@ class TabProfile extends GetView<HomeController> {
       onTap: () {
         Get.toNamed(Routes.CONTACT_DETAIL,
             arguments: [controller.name.value, controller.dataProfile, true]);
-        print(controller.dataProfile);
       },
       child: Container(
         height: 53.h,

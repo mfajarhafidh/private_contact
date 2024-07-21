@@ -12,43 +12,47 @@ import 'package:testtrinity/presentation/controllers/home/home_controller.dart';
 class TabHome extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shadowColor: ColorConstants.white,
-        toolbarHeight: kToolbarHeight + 20.h,
-        centerTitle: false,
-        backgroundColor: ColorConstants.white,
-        title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Text(
-            'My Contacts',
-            style: TextStyleConstants.appBarText,
-          ),
-        ),
-      ),
-      body: Obx(
-        () => RefreshIndicator(
-          onRefresh: () => controller.onRefresh(),
-          child: Padding(
-            padding: EdgeInsets.only(left: 26.w, right: 32.w),
-            child: ListView(
-              controller: controller.scrollController,
-              children: [
-                18.verticalSpace,
-                _textField(),
-                25.verticalSpace,
-                _gridContacts(),
-                75.verticalSpace,
-              ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          shadowColor: ColorConstants.white,
+          toolbarHeight: kToolbarHeight + 20.h,
+          centerTitle: false,
+          backgroundColor: ColorConstants.white,
+          title: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              'My Contacts',
+              style: TextStyleConstants.appBarText,
             ),
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed(Routes.CONTACT_DETAIL, arguments: [true]),
-        backgroundColor: ColorConstants.blue,
-        child: SvgPicture.asset('assets/icons/icon_plus.svg'),
+        body: Obx(
+          () => RefreshIndicator(
+            onRefresh: () => controller.onRefresh(),
+            child: Padding(
+              padding: EdgeInsets.only(left: 26.w, right: 32.w),
+              child: ListView(
+                controller: controller.scrollController,
+                children: [
+                  18.verticalSpace,
+                  _textField(),
+                  25.verticalSpace,
+                  _gridContacts(),
+                  75.verticalSpace,
+                ],
+              ),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () =>
+              Get.toNamed(Routes.CONTACT_DETAIL, arguments: [true]),
+          backgroundColor: ColorConstants.blue,
+          child: SvgPicture.asset('assets/icons/icon_plus.svg'),
+        ),
       ),
     );
   }

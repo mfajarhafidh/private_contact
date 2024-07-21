@@ -125,7 +125,7 @@ class ContactDetailController extends GetxController {
             mapData["id"].toString().toLowerCase(),
       )['dob'] = selectedDate.value;
 
-      Get.offNamed(Routes.HOME);
+      Get.back();
       cHome.selectedPage(0);
       cHome.pageController.jumpToPage(0);
     } else {
@@ -148,7 +148,7 @@ class ContactDetailController extends GetxController {
           element["id"].toString().toLowerCase() ==
           mapData["id"].toString().toLowerCase(),
     );
-    Get.offNamed(Routes.HOME);
+    Get.back();
 
     refresh();
   }
