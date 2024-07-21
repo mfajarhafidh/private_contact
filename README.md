@@ -1,4 +1,4 @@
-# Private Contact
+# Private Contact App
 
 ## Sssh, access your private contact using your ID!
 
