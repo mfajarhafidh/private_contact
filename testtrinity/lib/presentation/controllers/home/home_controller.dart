@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testtrinity/domain/entities/data_json/data_json_model.dart';
+import 'package:testtrinity/infrastructure/data/data_sources/local/storage_local.dart';
+import 'package:testtrinity/infrastructure/navigation/routes.dart';
 
 class HomeController extends GetxController {
   RxInt selectedPage = 0.obs;
@@ -16,6 +18,7 @@ class HomeController extends GetxController {
 
   late PageController pageController;
   TextEditingController textEditingController = TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   Map dataProfile = {};
 
@@ -212,5 +215,11 @@ class HomeController extends GetxController {
     name.value = '${dataProfile['firstName']} ${dataProfile['lastName']}';
     email.value = '${dataProfile['email']}';
     dateOfBirth.value = '${dataProfile['dob']}';
+  }
+
+  Future<void> logout() async {
+    await StorageLocal()
+        .storageSharedPreferenceDelete(key: StorageLocal.USER_ID);
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

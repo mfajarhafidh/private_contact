@@ -20,4 +20,12 @@ class StorageLocal {
     String? val = pref.getString(key);
     return val ?? '';
   }
+
+  Future<dynamic> storageSharedPreferenceDelete({required String key}) async {
+    return instance().then((pref) async {
+      if (key.isNotEmpty) {
+        pref.remove(key);
+      }
+    });
+  }
 }

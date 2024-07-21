@@ -27,6 +27,7 @@ class TabProfile extends GetView<HomeController> {
           Padding(
             padding: EdgeInsets.only(right: 20.w, top: 20.h),
             child: GestureDetector(
+              onTap: () => controller.logout(),
               child: Text(
                 'Logout',
                 style: TextStyleConstants.buttonText,
@@ -83,7 +84,7 @@ class TabProfile extends GetView<HomeController> {
     return GestureDetector(
       onTap: () {
         Get.toNamed(Routes.CONTACT_DETAIL,
-            arguments: [controller.name.value, controller.dataProfile]);
+            arguments: [controller.name.value, controller.dataProfile, true]);
         print(controller.dataProfile);
       },
       child: Container(
