@@ -22,6 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: any
+  mocktail: any
 
 flutter_icons:
   android: true
