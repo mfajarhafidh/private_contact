@@ -32,6 +32,7 @@ class TabHome extends GetView<HomeController> {
           child: Padding(
             padding: EdgeInsets.only(left: 26.w, right: 32.w),
             child: ListView(
+              controller: controller.scrollController,
               children: [
                 18.verticalSpace,
                 _textField(),
@@ -125,7 +126,7 @@ class TabHome extends GetView<HomeController> {
       {required String name, required Map contact, required bool enableFlag}) {
     return InkWell(
       onTap: () =>
-          Get.toNamed(Routes.CONTACT_DETAIL, arguments: [name, contact]),
+          Get.toNamed(Routes.CONTACT_DETAIL, arguments: [name, contact, false]),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),

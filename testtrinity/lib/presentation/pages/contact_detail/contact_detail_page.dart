@@ -152,7 +152,9 @@ class ContactDetailPage extends GetView<ContactDetailController> {
                       children: [
                         _buttonUpdate(),
                         27.verticalSpace,
-                        _buttonRemove(),
+                        controller.disableRemove.value == true
+                            ? const SizedBox()
+                            : _buttonRemove(),
                       ],
                     )
             ],

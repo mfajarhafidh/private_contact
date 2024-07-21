@@ -15,6 +15,7 @@ class ContactDetailController extends GetxController {
 
   RxBool isFilled = false.obs;
   RxBool enableCreate = false.obs;
+  RxBool disableRemove = false.obs;
 
   HomeController cHome = Get.find();
 
@@ -34,9 +35,16 @@ class ContactDetailController extends GetxController {
       } else {
         name.value = args[0];
         mapData = args[1];
+        disableRemove.value = args[2];
       }
     }
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    scrollController.dispose();
+    super.onClose();
   }
 
   void setFirstName({required String value}) {
@@ -118,6 +126,8 @@ class ContactDetailController extends GetxController {
       )['dob'] = selectedDate.value;
 
       Get.offNamed(Routes.HOME);
+      cHome.selectedPage(0);
+      cHome.pageController.jumpToPage(0);
     } else {
       scrollController.animateTo(scrollController.position.minScrollExtent,
           duration: Duration(milliseconds: 100), curve: Curves.easeIn);
