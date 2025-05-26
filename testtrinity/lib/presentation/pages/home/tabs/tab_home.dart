@@ -12,8 +12,8 @@ import 'package:testtrinity/presentation/controllers/home/home_controller.dart';
 class TabHome extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         appBar: AppBar(
           shadowColor: ColorConstants.white,

@@ -90,7 +90,7 @@ class TabProfile extends GetView<HomeController> {
         height: 53.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
-            color: ColorConstants.blue.withOpacity(0.2)),
+            color: ColorConstants.blue.withValues(alpha: 0.2)),
         child: Center(
           child: Text(
             'Update my detail',
